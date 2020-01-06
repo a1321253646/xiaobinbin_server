@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lemeng.xiaobinbin</groupId>
+    <artifactId>xiaobinbin</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <dropwizard.version>1.2.0</dropwizard.version>
+        <java.version>1.8</java.version>
+        <feign.version>9.3.1</feign.version>
+        <fasterxml.jackson.version>2.9.2</fasterxml.jackson.version>
+        <dagger.verion>2.12</dagger.verion>
+        <jacoco.skip.instrument>true</jacoco.skip.instrument>
+        <jacoco.percentage.instruction>0.01</jacoco.percentage.instruction>
+        <jacoco.percentage.branch>0</jacoco.percentage.branch>
+
+        <mainClass>com.lemeng.xiaobinbin.HelloWorldApplication</mainClass>
+    </properties>
+
+    <repositories>
+        <!--<repository>-->
+            <!--<id>central</id>-->
+            <!--<url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
+            <!--<name>aliyun</name>-->
+        <!--</repository>-->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    <!--<pluginRepositories>-->
+        <!--<pluginRepository>-->
+            <!--<id>central</id>-->
+            <!--<url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
+            <!--<name>aliyun</name>-->
+        <!--</pluginRepository>-->
+    <!--</pluginRepositories>-->
+
+    <dependencies>
+	    <dependency>
+	        <groupId>io.dropwizard</groupId>
+	        <artifactId>dropwizard-core</artifactId>
+	        <version>${dropwizard.version}</version>
+	    </dependency>
+		
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.35</version>
+        </dependency>
+        <dependency>
+    		<groupId>org.bouncycastle</groupId>
+    		<artifactId>bcprov-jdk15on</artifactId>
+    		<version>1.62</version>
+		</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.commons/org.apache.commons.codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.12</version>
+		</dependency>
+
+        
+    </dependencies>
+
+
+    <build>
+	    <plugins>
+	    
+			 <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-shade-plugin</artifactId>
+			    <version>2.3</version>
+			    <configuration>
+			        <createDependencyReducedPom>true</createDependencyReducedPom>
+			        <filters>
+			            <filter>
+			                <artifact>*:*</artifact>
+			                <excludes>
+			                    <exclude>META-INF/*.SF</exclude>
+			                    <exclude>META-INF/*.DSA</exclude>
+			                    <exclude>META-INF/*.RSA</exclude>
+			                </excludes>
+			            </filter>
+			        </filters>
+			    </configuration>
+			    <executions>
+			        <execution>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>shade</goal>
+			            </goals>
+			            <configuration>
+			                <transformers>
+			                    <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+			                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+			                        <mainClass>com.lemeng.xiaobinbin.HelloWorldApplication</mainClass>
+			                    </transformer>
+			                </transformers>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+			    
+	     </plugins>
+
+
+    </build>
+
+</project>

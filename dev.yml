@@ -1,0 +1,26 @@
+template: Hello, %s!
+defaultName: Stranger
+updateDec: 亲爱的勇士您好，最新版本已经发布，为了您的游戏体验，请尽快前往TAPTAP进行更新。
+updateVersion: 56
+updateMust: 1
+dateVersion: 5600
+rangeTime: 1559375972715
+
+server:
+#  softNofileLimit: 1000
+#  hardNofileLimit: 1000
+  applicationConnectors:
+    - type: http
+      port: 9008
+
+    #this requires the alpn-boot library on the JVM's boot classpath
+    #- type: h2
+    #  port: 8445
+    #  keyStorePath: example.keystore
+    #  keyStorePassword: example
+  adminConnectors:
+    - type: http
+      port: 9009
+
+
+

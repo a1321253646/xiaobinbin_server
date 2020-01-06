@@ -1,0 +1,41 @@
+template: Hello, %s!
+defaultName: Stranger
+
+server:
+#  softNofileLimit: 1000
+#  hardNofileLimit: 1000
+  applicationConnectors:
+    - type: http
+      port: 9020
+
+    #this requires the alpn-boot library on the JVM's boot classpath
+    #- type: h2
+    #  port: 8445
+    #  keyStorePath: example.keystore
+    #  keyStorePassword: example
+  adminConnectors:
+    - type: http
+      port: 9021
+# Database settings.
+database:
+ 
+  # the name of your JDBC driver
+  driverClass: com.mysql.jdbc.Driver
+ 
+  # the username
+  user: root
+ 
+  # the password
+  password: zsbin149
+  
+  # the JDBC URLjdbc:mysql://localhost:3306/ourgame?serverTimezone=GMT%2B8&characterEncoding=utf-8
+  url: jdbc:mysql://localhost:3306/ourgame?serverTimezone=GMT%2B8&characterEncoding=utf8&autoReconnect=true
+ 
+  properties:
+    hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate.hbm2ddl.auto: update
+    hibernate.format_sql: true
+    hibernate.showSql: true
+
+
+
